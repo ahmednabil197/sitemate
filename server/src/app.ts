@@ -5,6 +5,8 @@ import cors from 'cors';
 
 require('dotenv').config();
 
+import api from './api/routes';
+
 
 const app = express();
 
@@ -19,5 +21,7 @@ app.get('/', (req: Request, res: Response) => {
     message: 'ack!',
   });
 });
+
+app.use('/api', api);
 
 export default app;
