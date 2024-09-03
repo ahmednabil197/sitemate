@@ -35,8 +35,8 @@
     </td>
   </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="['_id', 'title', 'edit', 'delete']"></tr>
-  <tr mat-row *matRowDef="let row; columns: ['_id', 'title', 'edit', 'delete'];"></tr>
+  <tr mat-header-row *matHeaderRowDef="['_id', 'title', 'description', 'edit', 'delete', ]"></tr>
+  <tr mat-row *matRowDef="let row; columns: ['_id', 'title', 'description', 'edit', 'delete'];"></tr>
 </table>
 <!-- <mat-paginator [length]="totalItems" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20]" (page)="onPageChange($event)"> -->
 

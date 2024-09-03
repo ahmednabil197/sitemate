@@ -12,11 +12,17 @@ import { MatPaginatorModule } from '@angular/material/paginator'
 import {MatTableModule} from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { HttpClientModule } from '@angular/common/http';
+import { IssueFormComponent } from './components/issues/issue-form/issue-form.component';
 
+import { MatCardModule } from '@angular/material/card'
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input'
 @NgModule({
   declarations: [
     AppComponent,
-    IssuesComponent
+    IssuesComponent,
+    IssueFormComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +31,12 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     MatPaginatorModule,
     MatTableModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatCardModule,
+    MatFormFieldModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

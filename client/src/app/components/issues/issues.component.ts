@@ -3,6 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Issue } from './issue';
 import { BehaviorSubject } from 'rxjs';
 import { IssuesService } from 'src/app/services/issues.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-issues',
@@ -15,21 +16,25 @@ export class IssuesComponent {
   dataSource = new MatTableDataSource<Issue>([]);
   totalDocuments$ = new BehaviorSubject(0);
 
-  constructor(private issuesService: IssuesService) {}
+  constructor(private issuesService: IssuesService, private router: Router) {}
 
   ngOnInit(): void {
     this.loadItems();
   }
   
 
-  edit(item: Issue) {
+  edit(issue: Issue) {
+    this.router.navigate(['/issues', issue._id]);
   }
 
   create() {
+    this.router.navigate(['/issues', 'new']);
   }
 
-  delete(item: Issue) {
-    debugger
+  delete(issue: Issue) {
+    this.issuesService.deleteItem(issue._id).subscribe(() => {
+      this.loadItems();
+    })
   }
 
   onPageChange(event: any) {
