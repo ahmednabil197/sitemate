@@ -1,0 +1,48 @@
+<div *ngIf="isLoading$ | async " class="loading-container">
+  <mat-spinner></mat-spinner>
+</div>
+
+<table *ngIf="(isLoading$ | async) === false" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="_id">
+    <th mat-header-cell *matHeaderCellDef> Id </th>
+    <td mat-cell *matCellDef="let element"> {{element._id}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef> title </th>
+    <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef> description </th>
+    <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+  </ng-container>
+
+  <!-- Edit Column -->
+  <ng-container matColumnDef="edit">
+    <th mat-header-cell *matHeaderCellDef> Edit </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-button class="btn btn-primary" (click)="edit(element)">Edit</button>
+    </td>
+  </ng-container>
+
+  <!-- Delete Column -->
+  <ng-container matColumnDef="delete">
+    <th mat-header-cell *matHeaderCellDef> Delete </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-button class="btn btn-danger" (click)="delete(element)">Delete</button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="['_id', 'title', 'edit', 'delete']"></tr>
+  <tr mat-row *matRowDef="let row; columns: ['_id', 'title', 'edit', 'delete'];"></tr>
+</table>
+<!-- <mat-paginator [length]="totalItems" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20]" (page)="onPageChange($event)"> -->
+
+<mat-paginator [length]="totalDocuments$ | async" [pageSize]="10" (page)="onPageChange($event)">
+</mat-paginator>
+
+<div class="d-flex justify-content-center">
+  <button (click)="create()" class="btn btn-success"> + create new item </button>
+</div>
