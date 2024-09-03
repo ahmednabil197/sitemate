@@ -31,14 +31,20 @@ export async function createOne(req: Request<{}, {}, IssueClass>, res: Response<
   }
 }
 
-export async function updateOne(req: Request, res: Response, next: NextFunction) {
-  res.json({
-    message: 'update one!',
-  });
+export async function updateOne(req: Request<IdParam, {}, IssueClassWithId>, res: Response<IssueClassWithId>, next: NextFunction) {
+  try {
+      const result = await IssueModel.findByIdAndUpdate(req.params.id, req.body, {new: true});
+      res.json(result?.toJSON());
+  } catch(error) {
+      next(error)
+  }
 }
 
-export async function deleteOne(req: Request, res: Response, next: NextFunction) {
-  res.json({
-    message: 'delete one!',
-  });
+export async function deleteOne(req: Request<IdParam>, res: Response, next: NextFunction) {
+  try {
+      await IssueModel.deleteOne({_id: req.params.id})
+      res.status(200).json();
+  } catch(error) {
+      next(error);
+  }
 }
