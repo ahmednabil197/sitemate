@@ -5,6 +5,7 @@ import cors from 'cors';
 
 require('dotenv').config();
 
+import * as middlewares from './middlewares';
 import api from './api/routes';
 
 
@@ -23,5 +24,8 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.use('/api', api);
+
+app.use(middlewares.notFound);
+app.use(middlewares.errorHandler);
 
 export default app;

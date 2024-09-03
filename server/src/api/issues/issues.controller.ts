@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import { IssueClass, IssueClassWithId, IssueModel } from "./issue.model";
 
 export async function findAll(req: Request, res: Response, next: NextFunction) {
   res.json({
@@ -12,10 +13,14 @@ export async function findOne(req: Request, res: Response, next: NextFunction) {
   });
 }
 
-export async function createOne(req: Request, res: Response, next: NextFunction) {
-  res.json({
-    message: 'create one!',
-  });
+export async function createOne(req: Request<{}, {}, IssueClass>, res: Response<IssueClassWithId>, next: NextFunction) {
+  try {
+      const result = await IssueModel.create(req.body);
+      
+      res.status(201).json(result.toJSON())
+  } catch(error) {
+      next(error)
+  }
 }
 
 export async function updateOne(req: Request, res: Response, next: NextFunction) {
