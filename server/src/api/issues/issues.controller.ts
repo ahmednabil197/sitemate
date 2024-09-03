@@ -2,10 +2,13 @@ import { NextFunction, Request, Response } from "express";
 import { IssueClass, IssueClassWithId, IssueModel } from "./issue.model";
 import IdParam from "../interfaces/idParam";
 
-export async function findAll(req: Request, res: Response, next: NextFunction) {
-  res.json({
-    message: 'ack find all!',
-  });
+export async function findAll(req: Request, res: Response<IssueClassWithId[]>, next: NextFunction) {
+  try {
+    const result = await IssueModel.find()
+    res.json(result);
+  } catch(error) {
+      next(error);
+  }
 }
 
 export async function findOne(req: Request<IdParam>, res: Response<IssueClassWithId>, next: NextFunction) {
