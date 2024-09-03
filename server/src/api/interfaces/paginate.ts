@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 const DEFAULT_PAGE_NUMBER = 1;
-const DEFAULT_PAGE_LIMIT = 1;
+const DEFAULT_PAGE_LIMIT = 10;
 
 export const paginationSchema = z.object({
     page: z.number({coerce: true}).min(1).optional().default(DEFAULT_PAGE_NUMBER),
