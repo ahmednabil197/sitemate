@@ -1,10 +1,15 @@
 import { NextFunction, Request, Response } from "express";
 import { IssueClass, IssueClassWithId, IssueModel } from "./issue.model";
 import IdParam from "../interfaces/idParam";
+import { paginationSchema } from "../interfaces/paginate";
+import { PaginateResult } from "mongoose";
 
-export async function findAll(req: Request, res: Response<IssueClassWithId[]>, next: NextFunction) {
+export async function findAll(req: Request, res: Response<PaginateResult<IssueClassWithId>>, next: NextFunction) {
   try {
-    const result = await IssueModel.find()
+    const pagination = paginationSchema.parse(req.params);
+    const result = await IssueModel.paginate<IssueClassWithId>({}, {
+      ...pagination,
+    })
     res.json(result);
   } catch(error) {
       next(error);

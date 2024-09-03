@@ -1,7 +1,8 @@
 import { getModelForClass, prop } from "@typegoose/typegoose";
 import { WithId } from "mongodb";
+import PaginatedClass from "../../utils/paginatedClass";
 
-class Issue {
+class Issue extends PaginatedClass{
     @prop({ required: true })
     title!: string;
   
