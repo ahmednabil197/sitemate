@@ -6,6 +6,10 @@
   justify-content: center;
 
   ::ng-deep {
+    mat-card-title {
+      padding: 10px;
+    }
+
     mat-card {
       display: flex;
       align-items: center;
