@@ -21,7 +21,7 @@ export class IssuesService {
   }
 
   getItems(page: number = 0): Observable<PaginateResult<Issue>> {
-    return this.http.get<PaginateResult<Issue>>(`${this.apiUrl}/api/issues?page=${page}`);
+    return this.http.get<PaginateResult<Issue>>(`${this.apiUrl}/api/issues?page=${page + 1}`);
   }
 
   updateItem(id: string, item: Partial<Issue>): Observable<Issue> {

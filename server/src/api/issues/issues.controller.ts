@@ -6,7 +6,7 @@ import { PaginateResult } from "mongoose";
 
 export async function findAll(req: Request, res: Response<PaginateResult<IssueClassWithId>>, next: NextFunction) {
   try {
-    const pagination = paginationSchema.parse(req.params);
+    const pagination = paginationSchema.parse(req.query);
     const result = await IssueModel.paginate<IssueClassWithId>({}, {
       ...pagination,
     })
